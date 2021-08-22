@@ -1,0 +1,9 @@
+<app-loading-screen *ngIf="isLoading"></app-loading-screen>
+<div *ngIf="!isLoading">
+  <div class="row bg-main p-5">
+    <div class="col-md-3" *ngFor="let item of [0,1,2,3,4,5,6,7]">
+      <app-product-card></app-product-card>
+    </div>
+  </div>
+
+</div>

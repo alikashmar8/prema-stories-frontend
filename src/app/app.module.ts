@@ -1,3 +1,4 @@
+import { ProductCardComponent } from './cards/product-card/product-card.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -14,6 +15,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ReviewCardComponent } from './cards/review-card/review-card.component';
 import { ArtToHealingComponent } from './home/art-to-healing/art-to-healing.component';
 import { FooterComponent } from './common/footer/footer.component';
+import { ShopComponent } from './pages/shop/shop.component';
+import { LoadingScreenComponent } from './common/loading-screen/loading-screen.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { FooterComponent } from './common/footer/footer.component';
     HomeReviewsComponent,
     ReviewCardComponent,
     ArtToHealingComponent,
-    FooterComponent
+    FooterComponent,
+    ShopComponent,
+    LoadingScreenComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
