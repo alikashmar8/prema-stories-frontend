@@ -1,0 +1,47 @@
+<app-loading-screen *ngIf="isLoading"></app-loading-screen>
+
+<div class="container" *ngIf="!isLoading">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h2 class="card-title text-center">Add a new Category</h2>
+          <div class="form-label-group m-4">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              [(ngModel)]="name"
+              class="form-control common-input px-3"
+              placeholder="Name"
+              required
+              autofocus
+            />
+          </div>
+          <div class="form-label-group m-4">
+            <input
+              type="text"
+              name="description"
+              id="description"
+              [(ngModel)]="description"
+              class="form-control common-input px-3"
+              placeholder="Description"
+              autofocus
+            />
+          </div>
+
+          <div class="form-label-group m-4">
+            <button
+              class="btn btn-lg bg-orange btn-block form-control text-uppercase text-white"
+              [disabled]="isStoreLoading"
+              (click)="store()"
+            >
+              <span *ngIf="!isStoreLoading">Add Category</span>
+              <img src="{{ loadingGif }}" *ngIf="isStoreLoading" width="20px" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

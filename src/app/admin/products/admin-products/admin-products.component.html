@@ -1,0 +1,35 @@
+<app-loading-screen *ngIf="isLoading"></app-loading-screen>
+<div *ngIf="!isLoading">
+  <div class="row" style="margin: 100px">
+    <div class="col-md-8">
+      <h1>All Products:</h1>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-success" routerLink="/admin/products/create">
+        Add new
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!products[0]" class="m-5">
+    <H1 class="alert alert-danger">No products found!</H1>
+  </div>
+  <div *ngIf="products[0]">
+    <p class="my-3 p-3 rounded ff-montserrat bg-white" style="margin-left: 100px">
+      Products found : {{ products.length }}
+    </p>
+    <div class="latest-products">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4" style="display: inline-block" *ngFor="let product of products | filter: search" >
+            <div class="product-item">
+              <app-product-card [product]="product"></app-product-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--</div>-->
+
+

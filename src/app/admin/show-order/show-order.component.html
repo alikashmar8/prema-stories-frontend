@@ -1,0 +1,109 @@
+<app-loading-screen *ngIf="isLoading"></app-loading-screen>
+
+<div class="m-5" *ngIf="!isLoading">
+  <div class="container-fluid my-5  justify-content-center">
+    <!-- <div class="card card-1">
+      <div class="row mt-4">
+        <div class="col">
+            <div class="row justify-content-between">
+                <div class="col-auto">
+                    <p class="mb-1 text-dark"><b>Order Details</b></p>
+                </div>
+                <div class="flex-sm-col text-right col">
+                    <p class="mb-1"><b>Total</b></p>
+                </div>
+                <div class="flex-sm-col col-auto">
+                    <p class="mb-1">$ {{total}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row invoice ">
+        <div class="col">
+            <p class="mb-1"> Invoice Number : {{order.id}}</p>
+            <p class="mb-1">Invoice Date : {{order.created_at}}</p>
+        </div>
+    </div> -->
+    <div class="container m-5" style="margin-top: 100px!important;">
+      <div class="row m-5">
+        <div class="col-md-7">
+          <h3>Order Details:</h3>
+        </div>
+        <div class="col-md-2  ">
+          <mat-select placeholder="Status" [(ngModel)]="order.status" name="status">
+            <mat-option *ngFor="let status of statuses" [value]="status"
+              [ngClass]="{'bg-warning': status === 'PENDING', 'bg-success' : status === 'DELIVERED', 'bg-danger': status == 'REJECTED' }">
+              {{status}}
+            </mat-option>
+          </mat-select>
+        </div>
+        <div class="col-md-2"> <button class="btn btn-primary" (click)="updateStatus(order.status)" >Update Status</button>
+        </div>
+
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <h6>Invoice ID: {{order.id}}</h6>
+          <h6>Invoice Date: {{order.created_at}}</h6>
+        </div>
+        <div class="col-md-4">
+          <h6 class="text-right">Total: {{total}} $</h6>
+          <h6 class="text-right">Payment Type: {{order.payment_type}} </h6>
+        </div>
+      </div>
+      <hr>
+      <h3 class="m-5">User Details:</h3>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <h6>User Name: {{order.name}}</h6>
+          <h6>Email: {{order.email}}</h6>
+          <h6>Mobile: {{order.phone_number}}</h6>
+          <h6>Address: {{order.address}}</h6>
+        </div>
+        <div class="col-md-4">
+          <h6 class="text-right">Notes: {{order.notes}}</h6>
+          <!-- <h6 class="text-right">Payment Type: {{order.payment_type}} $</h6> -->
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row justify-content-between mb-3">
+          <div class="col-auto">
+            <h6 class="color-1 mb-0 change-color">Receipt</h6>
+          </div>
+          <!-- <div class="col-auto "> <small>Receipt Voucher : 1KAU9-84UIL</small> </div> -->
+        </div>
+        <div class="row m-3" *ngFor="let product of order.products">
+          <div class="col">
+            <div class="card card-2">
+              <div class="card-body">
+                <div class="media">
+                  <div class="sq align-self-center "> <img
+                      class="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0"
+                      src="{{uploadsUrl}}/{{product?.image}}" width="135" height="135" /> </div>
+                  <div class="media-body my-auto text-right">
+                    <div class="row my-auto flex-column flex-md-row">
+                      <div class="col my-auto">
+                        <h6 class="mb-0"> {{product.name}}</h6>
+                      </div>
+                      <div class="col-auto my-auto"> <small> </small></div>
+                      <div class="col my-auto"> <small></small></div>
+                      <div class="col my-auto"> <small></small></div>
+                      <div class="col my-auto">
+                        <h6 class="mb-0">$ {{product.price}}</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-3 ">
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

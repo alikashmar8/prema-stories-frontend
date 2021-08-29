@@ -1,0 +1,55 @@
+<app-loading-screen *ngIf="isLoading"></app-loading-screen>
+
+<div class="container m-5" *ngIf="!isLoading">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h2 class="card-title text-center">Edit Product</h2>
+          <img src="{{uploadsUrl}}/{{product.image}}" width="350" height="350">
+          <div class="form-label-group m-4">
+            <input type="text" name="name" id="name" [(ngModel)]="product.name" class="form-control common-input px-3"
+              placeholder="Name" required autofocus />
+          </div>
+          <div class="form-label-group m-4">
+            <input type="text" name="description" id="description" [(ngModel)]="product.description"
+              class="form-control common-input px-3" placeholder="Description" required autofocus />
+          </div>
+
+          <div class="form-label-group m-4">
+            <input type="number" name="price" id="price" [(ngModel)]="product.price"
+              class="form-control common-input px-3" placeholder="Price" required autofocus min="1" />
+          </div>
+
+          <div class="form-label-group m-4">
+            <input type="number" name="quantity" id="quantity" [(ngModel)]="product.quantity"
+              class="form-control common-input px-3" placeholder="Quantity" required autofocus min="1" />
+          </div>
+          <div class="form-label-group m-4">
+            <span style="margin-right: 100px">Category:</span>
+            <select class="form-control-sm" [(ngModel)]="categoryId">
+              <option *ngFor="let category of categories" [value]="category.id">
+                {{ category.name }}
+              </option>
+            </select>
+          </div>
+          <form class="form-signin" [formGroup]="form">
+
+            <div class="form-label-group m-4">
+              <input type="file" name="image" id="image" formControlName="image" (change)="uploadImage($event)"
+                class="form-control common-input px-3" placeholder="Quantity" autofocus min="1" />
+            </div>
+
+            <div class="form-label-group m-4">
+              <button class="btn btn-lg btn-primary btn-block form-control text-uppercase" [disabled]="isUpdateLoading"
+                (click)="update()">
+                <span *ngIf="!isUpdateLoading">Edit Product</span>
+                <img src="{{ loadingGif }}" *ngIf="isUpdateLoading" width="20px" />
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

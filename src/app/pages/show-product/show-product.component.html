@@ -1,0 +1,151 @@
+<app-loading-screen *ngIf="isLoading"></app-loading-screen>
+
+<main class="container m-5" *ngIf="!isLoading">
+  <!-- Left Column / Headphones Image -->
+  <div class="left-column">
+    <img src="{{ uploadsUrl }}/{{ product.image }}" alt="Product Image"
+      style="max-height: 100%; object-fit: contain;" />
+  </div>
+
+  <!-- Right Column -->
+  <div class="right-column">
+    <!-- Product Description -->
+    <div class="product-description">
+      <span>{{ product.category?.name }}</span>
+      <h1>{{ product.name }}</h1>
+      <p class="my-5">{{ product.description }}</p>
+    </div>
+
+    <!-- Product Pricing -->
+    <div class="product-price">
+      <span>{{ product.price }} $</span>
+
+      <a href="{{apiBaseUrl}}checkout/{{product.id}}" class="btn btn-primary"><i
+          class="fa fa-shopping-cart mx-1"></i>Order now</a>
+      <!-- <a (click)="open(content)" class="btn btn-primary"><i class="fa fa-shopping-cart mx-1"></i>Buy now</a> -->
+    </div>
+  </div>
+</main>
+
+<ng-template #content let-modal class="p-5" style=" position: absolute;">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <strong>Buy Product</strong>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <li>
+      <strong> Choose a payment method</strong>
+    </li>
+    <div *ngFor="let method of paymentMethods; let i = index">
+      <input name="option-{{ i }}" type="radio" [value]="method" [(ngModel)]="selectedPayment"
+        (ngModelChange)="log(selectedPayment)" />
+      {{ method }}
+      <br />
+    </div>
+    <div *ngIf="selectedPayment.toLowerCase() == 'cash on delivery'">
+      <hr class="my-3" />
+      <form id="contact" action="" method="post">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <fieldset>
+              <label class="col-form-label" for="name">Full name <span class="text-danger">* </span>:</label>
+              <input name="name" [(ngModel)]="name" type="text" class="form-control" id="name" placeholder="Full Name"
+                required="" />
+            </fieldset>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <fieldset>
+              <label class="col-form-label" for="email">Email address <span class="text-danger">*</span> :</label>
+              <input name="email" [(ngModel)]="email" type="text" class="form-control" id="email"
+                placeholder="E-Mail Address" required="required" />
+            </fieldset>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <fieldset>
+              <label class="col-form-label" for="phoneNumber">Phone number</label>
+              <input name="phoneNumber" [(ngModel)]="phoneNumber" type="text" class="form-control" id="phoneNumber"
+                placeholder="Phone Number" />
+            </fieldset>
+          </div>
+          <div class="col-lg-12">
+            <fieldset>
+              <label class="col-form-label" for="address">Your address in details
+                <span class="text-danger">*</span> :</label>
+              <textarea name="address" [(ngModel)]="address" rows="6" class="form-control" id="address"
+                placeholder="Your address details" required="required"></textarea>
+            </fieldset>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <fieldset>
+              <label class="col-form-label" for="notes">Notes</label>
+              <input name="notes" [(ngModel)]="notes" type="text" class="form-control" id="notes" placeholder="Notes" />
+            </fieldset>
+          </div>
+          <div class="alert alert-danger m-2" *ngIf="errorOrderText">
+            {{ errorOrderText }}
+          </div>
+          <div class="col-lg-12 my-3">
+            <fieldset>
+              <button type="submit" id="form-submit" class="btn btn-primary" (click)="
+                  orderNow(
+                    address,
+                    product.id,
+                    name,
+                    cashType,
+                    email,
+                    phoneNumber,
+                    notes,
+                    ''
+                  )
+                " [disabled]="isOrdering" style="width: 100%">
+                <span *ngIf="!isOrdering">Order Now</span>
+                <span *ngIf="isOrdering"><img src="{{ loadingGif }}" width="20px" /></span>
+              </button>
+            </fieldset>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="selectedPayment.toLowerCase() == 'stripe'">
+      <a href="{{apiBaseUrl}}checkout/{{product.id}}" class="btn btn-primary m-5">Buy with stripe</a>
+      <!-- <app-stripe-checkout (newItemEvent)="handleStripeResponse($event)" [product]="product"></app-stripe-checkout> -->
+    </div>
+    <div *ngIf="selectedPayment.toLowerCase() == 'paypal'">
+      <div id="paypalButtons"></div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('cancel')">
+      Cancel
+    </button>
+
+    <!--    <button-->
+    <!--      type="button"-->
+    <!--      class="btn btn-danger"-->
+    <!--      (click)="delete()"-->
+    <!--      -->
+    <!--      [disabled]="isDeleteLoading"-->
+    <!--    >-->
+    <!--      <img *ngIf="isDeleteLoading" src="{{ loadingGifUrl }}" width="22px" />-->
+    <!--      <span *ngIf="!isDeleteLoading">Delete</span>-->
+    <!--    </button>-->
+  </div>
+</ng-template>
+
+<script>
+  $(document).ready(function () {
+    $(".color-choose input").on("click", function () {
+      var headphonesColor = $(this).attr("data-image");
+
+      $(".active").removeClass("active");
+      $(".left-column img[data-image = " + headphonesColor + "]").addClass(
+        "active"
+      );
+      $(this).addClass("active");
+    });
+  });
+</script>

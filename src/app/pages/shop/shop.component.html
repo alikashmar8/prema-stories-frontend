@@ -1,9 +1,53 @@
 <app-loading-screen *ngIf="isLoading"></app-loading-screen>
 <div *ngIf="!isLoading">
-  <div class="row bg-main p-5">
-    <div class="col-md-3" *ngFor="let item of [0,1,2,3,4,5,6,7]">
-      <app-product-card></app-product-card>
+  <div class="m-5 row">
+    <div class="col-md-6 mx-5" style="margin-top: 70px">
+      <h1>All Products:</h1>
     </div>
+    <div class="col-md-4 mx-5"></div>
   </div>
 
+  <div *ngIf="allProducts[0]">
+    <div class="row m-5">
+      <div class="col-md-4 ml-5">Products found : {{ products.length }}</div>
+      <div class="col-md-2 mx-auto">
+        <select
+          class="form-control-sm"
+          [(ngModel)]="searchCategory"
+          (ngModelChange)="filterByCategory()"
+        >
+          <option value="null">All Categories</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-4 float-right">
+        <input
+          type="text"
+          [(ngModel)]="search"
+          name="search"
+          placeholder="Search Products"
+        />
+      </div>
+    </div>
+    <div class="latest-products">
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-md-4"
+            style="display: inline-block"
+            *ngFor="let product of products | filter: search"
+          >
+            <div class="product-item">
+              <app-product-card [product]="product"></app-product-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!allProducts[0]" class="m-5">
+    <H1 class="alert alert-danger">No products found!</H1>
+  </div>
 </div>

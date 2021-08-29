@@ -1,16 +1,50 @@
-  <div class="product-item">
-    <a href="#"><img src="assets/images/hippos.jpeg" alt=""></a>
-    <div class="down-content" style="background-color: #F7C10E;">
-      <a href="#"  ><h4 style="color: #0D2321;" >Tittle </h4></a>
-      <h6>$25.75</h6>
-      <p style="color: #343E40;">Lorem ipsume dolor sit amet, adipisicing elite.</p>
-      <ul class="stars">
+  <div class="product-item" style="border-radius: 20px">
+    <a routerLink="/products/{{product.id}}"><img src="{{uploadsUrl}}/{{product?.image}}" alt="" style="border-radius: 20px 20px 0 0;"></a>
+    <div class="down-content white" style="border-radius:0 0 20px 20px" >
+      <a routerLink="/products/{{product.id}}" ><h4 style="color: #0D2321;" >{{product.name}} </h4></a>
+      <h6>${{product.price}}</h6>
+      <hr>
+      <p style="color: #343E40;">{{product.description}}</p>
+      <div *ngIf='isAdmin'>
+        <button class="btn btn-info mx-4" routerLink="/admin/products/edit/{{product?.id}}" >Edit</button>
+        <button class="btn btn-danger"  (click)="open(content)" >Delete</button>
+      </div>
+      <!-- <ul class="stars">
         <li><i class="fa fa-star"></i></li>
         <li><i class="fa fa-star"></i></li>
         <li><i class="fa fa-star"></i></li>
         <li><i class="fa fa-star"></i></li>
         <li><i class="fa fa-star"></i></li>
       </ul>
-      <span>Reviews (24)</span>
+      <span>Reviews (24)</span> -->
     </div>
   </div>
+
+
+
+<!--delete modal-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete Product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <div>Are you sure you want to delete this product?</div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('cancel')">
+      Cancel
+    </button>
+
+    <button type="button" class="btn btn-danger" (click)="delete()" [disabled]="isDeleteLoading">
+      <img *ngIf="isDeleteLoading" src="{{ loadingGifUrl }}" width="22px" />
+      <span *ngIf="!isDeleteLoading">Delete</span>
+    </button>
+  </div>
+</ng-template>

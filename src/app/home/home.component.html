@@ -1,12 +1,12 @@
 <div>
   <app-section1></app-section1>
-  <app-products-section></app-products-section>
-  <app-about-authors></app-about-authors>
+  <app-products-section  [products]="products" ></app-products-section>
+  <!-- <app-about-authors></app-about-authors>   -->
   <app-home-reviews></app-home-reviews>
   <!-- <div class=" row m-5" style="background-color: #F7C10E!important; z-index: 999999!important;"></div> -->
   <app-art-to-healing></app-art-to-healing>
-  <div class="row p-5" style="background-color: #D95605;">
+  <div class="row p-5 bg-yellow ">
     <div class="col-md-10"><h1 style="color: white;" >Get In Touch</h1></div>
-    <div class="col-md-2"><button class="btn btn-dark">Contact Us</button></div>
+    <div class="col-md-2"><button class="btn bg-orange text-white" routerLink="/contact-us" >Contact Us</button></div>
   </div>
 </div>

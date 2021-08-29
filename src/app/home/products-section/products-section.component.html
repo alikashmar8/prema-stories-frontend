@@ -4,17 +4,11 @@
       <div class="col-md-12">
         <div class="section-heading">
           <h2>Latest Products</h2>
-          <a href="products.html">view all products <i class="fa fa-angle-right"></i></a>
+          <a routerLink='/products'>view all products <i class="fa fa-angle-right"></i></a>
         </div>
       </div>
-      <div class="col-md-4">
-        <app-product-card></app-product-card>
-      </div>
-      <div class="col-md-4">
-        <app-product-card></app-product-card>
-      </div>
-      <div class="col-md-4">
-        <app-product-card></app-product-card>
+      <div class="col-md-3" *ngFor="let product of products">
+        <app-product-card [product]="product"></app-product-card>
       </div>
     </div>
   </div>
