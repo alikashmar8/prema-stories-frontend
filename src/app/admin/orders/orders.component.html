@@ -26,14 +26,14 @@
           <th scope="col">Phone Number</th>
           <!-- <th scope="col">Product</th> -->
           <th scope="col">Address</th>
-          <th scope="col">Payment Type</th>
+          <!-- <th scope="col">Payment Type</th> -->
           <th scope="col">Zip Code</th>
           <th scope="col">Notes</th>
           <th scope="col">Created At</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders | filter: search; index as i">
+        <tr *ngFor="let order of orders | filter: search; index as i" [routerLink]="'/admin/orders/'+order.id" style="cursor: pointer;" >
           <td>
             <a>
             <i class="fas fa-trash" style="color: rgb(252, 65, 65);"  (click)="open(content, order.id)" ></i>
@@ -63,9 +63,9 @@
           <td>
             {{ order.address }}
           </td>
-          <td>
+          <!-- <td>
             {{ order.payment_type }}
-          </td>
+          </td> -->
           <td>
             {{ order.zip_code }}
           </td>

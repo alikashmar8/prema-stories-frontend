@@ -36,10 +36,9 @@
         <div class="row">
           <div
             class="col-md-4"
-            style="display: inline-block"
             *ngFor="let product of products | filter: search"
           >
-            <div class="product-item">
+            <div class="product-item" style="border: 0;">
               <app-product-card [product]="product"></app-product-card>
             </div>
           </div>

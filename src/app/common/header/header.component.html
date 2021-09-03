@@ -2,16 +2,12 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <!-- <a class="navbar-brand" href="index.html"><h2>Sixteen <em>Clothing</em></h2></a> -->
-      <a class="navbar-brand" href="index.html"><img src="assets/images/logo.jpeg"
-      style="
-        max-width: 200px;
-        margin-top: 0px;"
-        alt=""></a>
+      <a class="navbar-brand " href="index.html" ><img class="header-logo" src="assets/images/logo.jpeg" alt=""></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="sidebarToggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
+      <div class="collapse navbar-collapse" id="navbarResponsive" [class.show]="isShowSidebar">
         <ul class="navbar-nav ml-auto">
           <!--          Admin menu-->
           <li class="nav-item" [ngClass]="isCurrentRoute('/admin/products') ? 'active': '' " *ngIf="isAdmin">

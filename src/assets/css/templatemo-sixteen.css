@@ -11,6 +11,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%!important;
 }
 p {
 	margin-bottom: 0px;
@@ -97,7 +98,7 @@ a.filled-button:hover {
 }
 
 .contact-heading {
-	background-image: url(../images/contact-heading.jpg);
+	background-image: url(../images/contact-heading.jpeg);
 }
 
 .page-heading {
@@ -1000,6 +1001,17 @@ footer .inner-content p a {
 		margin-top: 30px;
 		margin-left: 0px;
 	}
+
+  .header-logo{
+    max-width: 100px!important;
+    margin-top: 0px;
+  }
+
+  .footer-logo{
+    max-width: 250px;
+    margin-top: 0px;
+  }
+
 }
 
 @media (max-width: 992px) {
@@ -1058,6 +1070,17 @@ footer .inner-content p a {
 		bottom: 0;
 	}
 }
+
+.header-logo{
+  max-width: 200px;
+  margin-top: 0px;
+}
+
+.footer-logo{
+  max-width: 333px;
+  margin-top: 0px;
+}
+
 
 /* Color Theme Swatches in Hex */
 .bg-main { background-color: #0D2321!important; }
