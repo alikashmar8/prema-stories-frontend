@@ -1081,6 +1081,12 @@ footer .inner-content p a {
   margin-top: 0px;
 }
 
+.fixed-button {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+}
+
 
 /* Color Theme Swatches in Hex */
 .bg-main { background-color: #0D2321!important; }

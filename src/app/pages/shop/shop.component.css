@@ -1,0 +1,17 @@
+abbr {
+  font-style: italic;
+  position: relative
+}
+
+abbr:hover::after {
+  background: #add8e6;
+  border-radius: 4px;
+  bottom: 150%;
+  content: attr(title);
+  display: block;
+  left: -250px ;
+  padding: 1em;
+  position: absolute;
+  width: 280px;
+  z-index: 1;
+}

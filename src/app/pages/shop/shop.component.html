@@ -6,16 +6,21 @@
     </div>
     <div class="col-md-4 mx-5"></div>
   </div>
+  <div class="fixed-button m-5">
+    <abbr style="
+    border: solid;
+    border-radius: 20px;
+    padding: 10px!important;
+    background-color: rgb(123, 169, 255);"
+      title="$5.50 shipping per book in Australia - $30 for one book international shipping – bulk orders please message for shipping quotes">Shipment
+      <i class="fa fa-info-circle" style="font-size:16px"></i></abbr>
+  </div>
 
   <div *ngIf="allProducts[0]">
     <div class="row m-5">
       <div class="col-md-4 ml-5">Products found : {{ products.length }}</div>
       <div class="col-md-2 mx-auto">
-        <select
-          class="form-control-sm"
-          [(ngModel)]="searchCategory"
-          (ngModelChange)="filterByCategory()"
-        >
+        <select class="form-control-sm" [(ngModel)]="searchCategory" (ngModelChange)="filterByCategory()">
           <option value="null">All Categories</option>
           <option *ngFor="let category of categories" [value]="category.id">
             {{ category.name }}
@@ -23,21 +28,13 @@
         </select>
       </div>
       <div class="col-md-4 float-right">
-        <input
-          type="text"
-          [(ngModel)]="search"
-          name="search"
-          placeholder="Search Products"
-        />
+        <input type="text" [(ngModel)]="search" name="search" placeholder="Search Products" />
       </div>
     </div>
     <div class="latest-products">
       <div class="container">
         <div class="row">
-          <div
-            class="col-md-4"
-            *ngFor="let product of products | filter: search"
-          >
+          <div class="col-md-4" *ngFor="let product of products | filter: search">
             <div class="product-item" style="border: 0;">
               <app-product-card [product]="product"></app-product-card>
             </div>
